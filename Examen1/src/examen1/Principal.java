@@ -47,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         edad = new javax.swing.JTextField();
         jd_logeado = new javax.swing.JDialog();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jtp = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         pnombre = new javax.swing.JTextField();
@@ -60,7 +60,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        cb_clases = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ta = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtcomandos = new javax.swing.JTextArea();
@@ -162,6 +163,12 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(336, Short.MAX_VALUE))
         );
 
+        jtp.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jtpStateChanged(evt);
+            }
+        });
+
         jLabel4.setText("Usuario");
 
         pnombre.setEditable(false);
@@ -234,26 +241,30 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(319, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Perfil", jPanel1);
+        jtp.addTab("Perfil", jPanel1);
+
+        ta.setColumns(20);
+        ta.setRows(5);
+        jScrollPane2.setViewportView(ta);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(cb_clases, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(625, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cb_clases, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("VIsualizar", jPanel2);
+        jtp.addTab("VIsualizar", jPanel2);
 
         jtcomandos.setColumns(20);
         jtcomandos.setRows(5);
@@ -287,7 +298,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(339, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Ejecutar", jPanel3);
+        jtp.addTab("Ejecutar", jPanel3);
 
         jButton3.setText("Cerrar Sesion");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -302,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
             jd_logeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_logeadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jtp)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_logeadoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -313,7 +324,7 @@ public class Principal extends javax.swing.JFrame {
             jd_logeadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_logeadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jtp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addContainerGap())
@@ -486,9 +497,39 @@ public class Principal extends javax.swing.JFrame {
                     System.out.println(s.getClases().get(i).getClase());
                 }
             }
+            if (comando.contains("Delete class")) {
+                String eliminarclase = comando.substring(12, comando.length()).replaceAll(" ", "");
+                for (Clase t : s.getClases()) {
+                    if(t.getClase().equals(eliminarclase)){
+                    s.getClases().remove(s.getClases().indexOf(t));
+                    }
+                }
+            }
+            if (comando.contains("Add Atribute to")) {
+                String anadirA = comando.substring(15, comando.length()).replaceAll(" ", "");
+                System.out.println(anadirA);
+                String[] anadir = anadirA.split("[(]");
+                for (Clase t : s.getClases()) {
+                    if(t.getClase().equals(anadir[0])){
+                    t.getAtributos().add(anadir[1].substring(0,anadir[1].length()-1));
+                    }
+            }
+            
         }
-        
+        } 
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jtpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtpStateChanged
+        // TODO add your handling code here:
+        if(jtp.getSelectedIndex()==1){
+            ta.setText("");
+            for (int i = 0; i < s.getClases().size(); i++) {
+                ta.append(s.getClases().get(i).toString()+"\n");
+                
+            }
+                
+            }
+    }//GEN-LAST:event_jtpStateChanged
 
     /**
      * @param args the command line arguments
@@ -526,7 +567,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb_clases;
     private javax.swing.JTextField contraseña;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField edad;
@@ -552,10 +592,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JDialog jd_logeado;
     private javax.swing.JDialog jd_registrar;
     private javax.swing.JTextArea jtcomandos;
+    private javax.swing.JTabbedPane jtp;
     private javax.swing.JPasswordField logpass;
     private javax.swing.JTextField loguser;
     private javax.swing.JTextField nombre;
@@ -563,6 +604,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField pedad;
     private javax.swing.JTextField pnombre;
     private javax.swing.JTextField pnombre1;
+    private javax.swing.JTextArea ta;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 ArrayList<usuario> users = new ArrayList();

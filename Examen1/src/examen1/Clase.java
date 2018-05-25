@@ -35,6 +35,7 @@ public class Clase {
     public ArrayList<String> getAtributos() {
         return atributos;
     }
+    
 
     @Override
     public String toString() {
