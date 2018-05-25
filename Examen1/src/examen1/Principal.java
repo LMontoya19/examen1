@@ -21,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-
+        
         setLocationRelativeTo(this);
     }
 
@@ -397,14 +397,14 @@ public class Principal extends javax.swing.JFrame {
         log = false;
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getContraseña().equals(logpass.getText()) && users.get(i).getUser().equals(loguser.getText())) {
-
+                
                 log = true;
                 s = users.get(i);
                 pcorreo.setText(s.getEmail());
                 pnombre.setText(s.getNombre());
                 pedad.setText(s.getEdad());
             }
-
+            
         }
         if (log == true) {
             jd_logeado.setModal(true);
@@ -467,13 +467,27 @@ public class Principal extends javax.swing.JFrame {
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
         String comando = jtcomandos.getText();
-        if(comando.length()>0){
-            System.out.println("r");
-        if(comando.contains("Create class")){
-        String crearclase = comando.substring(12,comando.length()).replaceAll(" ","");
-            System.out.println(crearclase);
+        jtcomandos.setText("");
+        if (comando.length() > 0) {
+            if (comando.contains("Create class")) {
+                String crearclase = comando.substring(12, comando.length()).replaceAll(" ", "");
+                System.out.println(crearclase);
+                s.getClases().add(new Clase(crearclase));
+            }
+            if (comando.contains("Modify class")) {
+                String modclase = comando.substring(12, comando.length()).replaceAll(" ", "");
+                System.out.println(modclase);
+                String[] mod = modclase.split("to");
+                for (int i = 0; i < s.getClases().size(); i++) {
+                    if (s.getClases().get(i).getClase().equals(mod[0])) {
+                        s.getClases().get(i).setClase(mod[1]);
+                        System.out.println(s.getClases().get(i).getClase());
+                    }
+                    System.out.println(s.getClases().get(i).getClase());
+                }
+            }
         }
-        }
+        
     }//GEN-LAST:event_jButton6MouseClicked
 
     /**
