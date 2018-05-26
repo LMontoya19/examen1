@@ -21,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
+
         setLocationRelativeTo(this);
     }
 
@@ -50,9 +50,9 @@ public class Principal extends javax.swing.JFrame {
         jtp = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        pnombre = new javax.swing.JTextField();
+        puser = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        pnombre1 = new javax.swing.JTextField();
+        pnombre = new javax.swing.JTextField();
         pedad = new javax.swing.JTextField();
         pcorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -171,7 +171,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel4.setText("Usuario");
 
-        pnombre.setEditable(false);
+        puser.setEditable(false);
 
         jLabel5.setText("Nombre");
 
@@ -196,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(201, 201, 201)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(puser, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -207,7 +207,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pedad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(384, Short.MAX_VALUE))
@@ -218,11 +218,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(puser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pedad, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,14 +408,17 @@ public class Principal extends javax.swing.JFrame {
         log = false;
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getContraseña().equals(logpass.getText()) && users.get(i).getUser().equals(loguser.getText())) {
-                
+
                 log = true;
                 s = users.get(i);
                 pcorreo.setText(s.getEmail());
-                pnombre.setText(s.getNombre());
+                puser.setText(s.getNombre());
                 pedad.setText(s.getEdad());
+                puser.setText(s.getUser());
+                pnombre.setText(s.getNombre());
+
             }
-            
+
         }
         if (log == true) {
             jd_logeado.setModal(true);
@@ -470,7 +473,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
-        s.setNombre(pnombre.getText());
+        s.setNombre(puser.getText());
         s.setEmail(pcorreo.getText());
         s.setEdad(pedad.getText());
     }//GEN-LAST:event_jButton5MouseClicked
@@ -500,8 +503,8 @@ public class Principal extends javax.swing.JFrame {
             if (comando.contains("Delete class")) {
                 String eliminarclase = comando.substring(12, comando.length()).replaceAll(" ", "");
                 for (Clase t : s.getClases()) {
-                    if(t.getClase().equals(eliminarclase)){
-                    s.getClases().remove(s.getClases().indexOf(t));
+                    if (t.getClase().equals(eliminarclase)) {
+                        s.getClases().remove(s.getClases().indexOf(t));
                     }
                 }
             }
@@ -510,25 +513,41 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println(anadirA);
                 String[] anadir = anadirA.split("[(]");
                 for (Clase t : s.getClases()) {
-                    if(t.getClase().equals(anadir[0])){
-                    t.getAtributos().add(anadir[1].substring(0,anadir[1].length()-1));
+                    if (t.getClase().equals(anadir[0])) {
+                        t.getAtributos().add(anadir[1].substring(0, anadir[1].length() - 1));
                     }
+                }
+
             }
-            
+            if (comando.contains("Modify Atribute from")) {
+                String moda = comando.substring(20, comando.length()).replaceAll(" ", "");
+                System.out.println(moda);
+                String[] anadir = moda.split("[(]");
+                for (Clase t : s.getClases()) {
+                    if (t.getClase().equals(anadir[0])) {
+                        String[] anadir2 = anadir[1].substring(1, anadir[1].length() - 1).split("to");
+                        for (int i = 0; i < t.getAtributos().size(); i++) {
+                            if (t.getAtributos().get(i).equals(anadir2[0])) {
+                                t.getAtributos().set(i, anadir[1]);
+                            }
+                        }
+                    }
+                }
+
+            }
         }
-        } 
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jtpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtpStateChanged
         // TODO add your handling code here:
-        if(jtp.getSelectedIndex()==1){
+        if (jtp.getSelectedIndex() == 1) {
             ta.setText("");
             for (int i = 0; i < s.getClases().size(); i++) {
-                ta.append(s.getClases().get(i).toString()+"\n");
-                
+                ta.append(s.getClases().get(i).toString() + "\n");
+
             }
-                
-            }
+
+        }
     }//GEN-LAST:event_jtpStateChanged
 
     /**
@@ -603,7 +622,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField pcorreo;
     private javax.swing.JTextField pedad;
     private javax.swing.JTextField pnombre;
-    private javax.swing.JTextField pnombre1;
+    private javax.swing.JTextField puser;
     private javax.swing.JTextArea ta;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables

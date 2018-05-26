@@ -200,7 +200,7 @@
                                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="pnombre" min="-2" pref="89" max="-2" attributes="0"/>
+                                  <Component id="puser" min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -213,7 +213,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="pedad" min="-2" pref="89" max="-2" attributes="0"/>
-                                      <Component id="pnombre1" min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="pnombre" min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="pcorreo" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="jButton5" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                                   </Group>
@@ -229,12 +229,12 @@
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="pnombre" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="puser" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="pnombre1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="pnombre" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -267,7 +267,7 @@
                     <Property name="text" type="java.lang.String" value="Usuario"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="pnombre">
+                <Component class="javax.swing.JTextField" name="puser">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
@@ -277,7 +277,7 @@
                     <Property name="text" type="java.lang.String" value="Nombre"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="pnombre1">
+                <Component class="javax.swing.JTextField" name="pnombre">
                 </Component>
                 <Component class="javax.swing.JTextField" name="pedad">
                 </Component>
